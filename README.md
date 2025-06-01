@@ -25,3 +25,31 @@ _BYU-Pathway Worldwide improves lives through access to spiritually based, onlin
 
 
 
+# 🛍️ Sleep Outside Project
+
+This project is a web application that allows users to browse and shop for outdoor gear and equipment.
+
+## 🚀 Production Site (Netlify)
+
+You can view the live production version of the site here:
+
+👉 [https://681ecb4f426f2e2ae1624af6--delicate-brigadeiros-1ca35c.netlify.app](https://681ecb4f426f2e2ae1624af6--delicate-brigadeiros-1ca35c.netlify.app)
+
+> This link points to the current production build and is automatically updated whenever changes are pushed to the `main` branch.
+
+## 🛠️ Technologies Used
+
+- HTML, CSS, JavaScript
+- Node.js + npm
+- Vite (or Webpack)
+- Netlify for deployment
+
+## 🧑‍🤝‍🧑 Team
+
+- Valdemar Lasnibat 
+- Sergio Pontes  
+-   
+
+## 📋 Trello Board
+
+[https://trello.com/b/UQfNK1rZ/wdd330-team17](https://trello.com/b/UQfNK1rZ/wdd330-team17)
