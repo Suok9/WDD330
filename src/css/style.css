@@ -241,6 +241,26 @@ button {
   grid-column: 3;
 }
 
+.hide {
+  display: none;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+#cartIcon.animate {
+  animation: bounce 0.5s ease;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
