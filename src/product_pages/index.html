@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" >
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+    <title>Sleep Outside | Cedar Ridge Rimrock 2-person tent</title>
+
+    <link rel="stylesheet" href="../css/style.css" >
+
+    <script src="../js/product.js" type="module"></script>
+  </head>
+
+  <body>
+    <header class="divider" id="main-header">
+    </header>
+
+    <main class="divider">
+      <h2 id="category">Category</h2>
+      <section class="product-detail">
+        <h3 id="productBrand">Brand</h3>
+
+        <h2 id="productName" class="divider">Product Name</h2>
+        <div id="colorSwatches"></div>
+       <div id="imageCarousel">
+            <img id="productImage" src="" alt="Product Image" />
+        </div>
+        <div class="thumbnails-container">
+            <div class="thumbnails-wrapper">
+                <!-- Thumbnails will be rendered here -->
+            </div>
+        </div>
+
+        <p id="productPrice" class="product-card__price">Price</p>
+
+        <p id="productColor" class="product__color">Color</p>
+
+        <p id="productDescription" class="product__description">Product Description</p>
+
+        <div class="product-detail__add">
+          <button id="addToCart" data-id="">Add to Cart</button>
+        </div>
+      </section>
+    </main>
+
+    <footer id="main-footer"></footer>
+       <script>
+        document.querySelectorAll('.thumbnail').forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                const thumbnailsContainer = document.querySelector('.thumbnails-container');
+                const thumbnailWidth = thumbnail.clientWidth + 10; // Include margin
+                const index = Array.from(thumbnailsContainer.children).indexOf(thumbnail);
+                thumbnailsContainer.scrollLeft = index * thumbnailWidth; // Scroll to the clicked thumbnail
+            });
+        });
+    </script>
+  </body>
+</html>
