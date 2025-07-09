@@ -60,6 +60,11 @@ p {
   color: var(--font-body);
 }
 
+.alert-list {
+  text-align: center;
+  font-weight: 600;
+}
+
 .hero {
   position: relative;
 }
