@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   root: "src/",
+  publicDir: "../public",   // 👈 tell Vite where /public is
   build: {
     outDir: "../dist",
     rollupOptions: {
