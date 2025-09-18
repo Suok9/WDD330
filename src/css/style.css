@@ -261,3 +261,12 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* Ensure consistent product image sizes in cards */
+.product-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;   /* perfect square area */
+  object-fit: cover;      /* crop edges, keep subject centered */
+  display: block;         /* remove inline-gap below images */
+}
+

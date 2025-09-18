@@ -1,3 +1,4 @@
+
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 // Render the contents of the cart
