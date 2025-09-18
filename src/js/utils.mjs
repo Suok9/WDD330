@@ -21,3 +21,19 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+
+// a little helper function to get a parameter from the URL query string
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get(param);
+}
+
+// a helper function to render a list of products
+export function renderListWithTemplate(template, parent, list, callback) {
+  list.forEach((item) => {
+    const clone = template.content.cloneNode(true);
+    const hydratedClone = callback(clone, item);
+    parent.appendChild(hydratedClone);
+  });
+}
