@@ -270,3 +270,9 @@ footer {
   display: block;         /* remove inline-gap below images */
 }
 
+.product-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
