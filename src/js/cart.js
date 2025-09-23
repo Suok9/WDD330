@@ -33,8 +33,10 @@ function cartItemTemplate(item, index) {
         <h2 class="card__name">${item.Name}</h2>
       </a>
       <p class="cart-card__color">${item.Colors && item.Colors.length > 0 ? item.Colors[0].ColorName : "No color available"}</p>
-      <p class="cart-card__quantity">Qty: ${item.quantity || 1}</p>
-      <p class="cart-card__price">$${item.FinalPrice}</p>
+      <p class="cart-card__quantity">Qty: ${(item.qty ?? item.quantity ?? 1)}</p>
+      <p class="cart-card__price">
+      $${(Number(item.FinalPrice) * (item.qty ?? item.quantity ?? 1)).toFixed(2)}
+      </p>
       <button class="remove-cart-item" data-index="${index}">Remove</button> <!-- Remove button -->
     </li>
   `;

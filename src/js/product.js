@@ -6,20 +6,19 @@ import ProductData from "./productdata.mjs";
 const dataSource = new ProductData("tents");
 
 function addProductToCart(product) {
-  // If you want to use the helper instead, uncomment:
-  // const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
-  // cart.push(product);
-  // localStorage.setItem("so-cart", JSON.stringify(cart));
-
-  // Using plain localStorage for now (matches your code):
   const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
-  cart.push(product);
+  const i = cart.findIndex(p => String(p.Id) === String(product.Id));
+  if (i > -1) {
+    cart[i].qty = (cart[i].qty || 1) + 1;   // increment quantity if it’s already in the cart
+  } else {
+    cart.push({ ...product, qty: 1 });      // first time adding this product
+  }
   localStorage.setItem("so-cart", JSON.stringify(cart));
 }
 
 async function renderProductDetails(productId) {
   // Ensure number-to-number comparison for item.Id
-  const product = await dataSource.findProductById(Number(productId));
+  const product = await dataSource.findProductById(productId);
   const container = document.querySelector("#product-details");
   if (!container) return;
 
