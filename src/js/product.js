@@ -1,49 +1,60 @@
-import { setLocalStorage } from "./utils.mjs";
+// Remove this if you aren’t using it (or switch to the helper below):
+// import { setLocalStorage } from "./utils.mjs";
+
 import ProductData from "./productdata.mjs";
 
 const dataSource = new ProductData("tents");
 
 function addProductToCart(product) {
-  // Get current cart from localStorage
+  // If you want to use the helper instead, uncomment:
+  // const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
+  // cart.push(product);
+  // localStorage.setItem("so-cart", JSON.stringify(cart));
+
+  // Using plain localStorage for now (matches your code):
   const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
-
-  // Add the new product to the cart
   cart.push(product);
-
-  // Save the updated cart back to localStorage
-  localStorage.setItem("so-cart", JSON.stringify(cart));  // Using localStorage directly for now
+  localStorage.setItem("so-cart", JSON.stringify(cart));
 }
 
 async function renderProductDetails(productId) {
-  // Fetch the product by ID from the data source
-  const product = await dataSource.findProductById(productId);
+  // Ensure number-to-number comparison for item.Id
+  const product = await dataSource.findProductById(Number(productId));
+  const container = document.querySelector("#product-details");
+  if (!container) return;
+
   if (!product) {
-    document.querySelector("#product-details").innerHTML = "<p>Product not found.</p>";
+    container.innerHTML = "<p>Product not found.</p>";
     return;
   }
 
-  // Render the product details dynamically in the HTML
-  document.querySelector("#product-details").innerHTML = `
+  container.innerHTML = `
     <img src="${product.Image}" alt="${product.Name}">
     <h2>${product.Name}</h2>
-    <p>${product.DescriptionHtmlSimple}</p>
+    <p>${product.DescriptionHtmlSimple ?? ""}</p>
     <p>Price: $${product.FinalPrice}</p>
     <button id="addToCart" class="btn" data-id="${product.Id}">Add to Cart</button>
   `;
 
-  // Add event listener for Add to Cart button
   const addBtn = document.getElementById("addToCart");
-  addBtn.addEventListener("click", () => {
-    addProductToCart(product);
-    window.location.href = "/cart/index.html";  // Redirect to the cart page after adding
-  });
+  if (addBtn) {
+    addBtn.addEventListener("click", () => {
+      addProductToCart(product);
+      // relative path so it works under any base
+      window.location.href = "../cart/index.html";
+    });
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
-  const productId = params.get("product");  // Get the product ID from the URL
+  const productId = params.get("product");
   if (productId) {
-    renderProductDetails(productId);  // Load and display product details
+    renderProductDetails(productId);
+  } else {
+    const container = document.querySelector("#product-details");
+    if (container) container.innerHTML = "<p>No product selected.</p>";
   }
 });
+
 
