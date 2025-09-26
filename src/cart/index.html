@@ -89,11 +89,18 @@
             <p class="cart-card__price">$199.99</p>
           </li> -->
         </ul>
+
       </section>
     </main>
 
-    <footer>&copy;NOT a real business</footer>
-     <!-- load cart script -->
-    <script type="module" src="/js/cart.js"></script>
-  </body>
+<!-- Add the total cart display here, inside <main> -->
+<div id="cartTotal" class="cart-total">
+   <h3>Total: $<span id="totalPrice">0.00</span></h3>
+</div>
+
+<footer>&copy;NOT a real business</footer>
+
+<!-- Load cart script -->
+<script type="module" src="/js/cart.js"></script>
+</body>
 </html>

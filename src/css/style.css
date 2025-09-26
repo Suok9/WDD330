@@ -276,3 +276,11 @@ footer {
   object-fit: cover;
   display: block;
 }
+
+/* Add this to your /css/style.css */
+.cart-total {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: right;
+}
