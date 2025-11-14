@@ -1,13 +1,13 @@
-import { getLocalStorage } from './utils.mjs';
+import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItems = getLocalStorage('so-cart');
+  const cartItems = getLocalStorage("so-cart");
   // eslint-disable-next-line no-console
-  console.log('cartItems =', cartItems);
+  console.log("cartItems =", cartItems);
   const htmlItems = (Array.isArray(cartItems) ? cartItems : [cartItems]).map(
     (item) => cartItemTemplate(item),
   );
-  document.querySelector('.product-list').innerHTML = htmlItems.join('');
+  document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
 
 function cartItemTemplate(item) {
