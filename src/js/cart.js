@@ -3,12 +3,14 @@ import { getLocalStorage, setLocalStorage } from './utils.mjs';
 function renderCartContents() {
   let cartItems = getLocalStorage('so-cart') || [];
 
+  // Ensure cartItems is an array
   if (!Array.isArray(cartItems)) {
     cartItems = [cartItems]; 
   }
 
   const cartListE1 = document.querySelector('.product-list');
 
+  // Check if cart is empty
   if (cartItems.length === 0) {
     cartListE1.innerHTML = '<p>Your cart is empty.</p>';
     return;
@@ -24,21 +26,18 @@ function cartItemTemplate(item) {
   return `
   <li class="cart-card divider" data-id="${item.id}">
     <a href="../product_pages/index.html?product=${item.id}" class="cart-card__image">
-      <img
-        src="${item.Image}"
-        alt="${item.Name}"
-      />
+      <img src="${item.Image || ''}" alt="${item.Name || 'Product Image'}" />
     </a>
     <a href="../product_pages/index.html?product=${item.id}">
-      <h2 class="card__name">${item.Name}</h2>
+      <h2 class="card__name">${item.Name || 'Product Name'}</h2>
     </a>
-    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1</p>
-    <p class="cart-card__price">$${item.FinalPrice}</p>
+    <p class="cart-card__color">${item.Colors && item.Colors.length > 0 ? item.Colors[0].ColorName : 'No color specified'}</p>
+    <p class="cart-card__quantity">qty: <span class="item-quantity">${item.quantity || 1}</span></p>
+    <p class="cart-card__price">$${item.FinalPrice || '0.00'}</p>
     
     <div class="cart-card__quantity">
         <button class="quantity-decrease">-</button>
-        <input type="number" class="quantity-input" value="1" min="1" />
+        <input type="number" class="quantity-input" value="${item.quantity || 1}" min="1" />
         <button class="quantity-increase">+</button>
     </div>
     <button class="remove-btn" data-id="${item.id}">Remove</button>
@@ -57,16 +56,12 @@ function addRemoveListeners() {
 }
 
 function removeItem(id) {
-  const cartItems = getLocalStorage('so-cart') || [];
+  let cartItems = getLocalStorage('so-cart') || [];
 
   // Filter out the item to remove
-  const stringifiedId = String(id);
-  const newCart = cartItems.filter(item => String(item.id) !== stringifiedId);
-
-
-
+  const newCart = cartItems.filter(item => String(item.id) !== String(id));
+  
   setLocalStorage('so-cart', newCart); 
-
   renderCartContents(); 
 }
 
@@ -80,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let currentQuantity = parseInt(quantityInput.value);
             if (currentQuantity > 1) {
                 quantityInput.value = currentQuantity - 1;
+                updateCartQuantity(button.closest('.cart-card').dataset.id, quantityInput.value);
             }
         });
     });
@@ -89,8 +85,37 @@ document.addEventListener("DOMContentLoaded", function() {
             const quantityInput = this.previousElementSibling;
             let currentQuantity = parseInt(quantityInput.value);
             quantityInput.value = currentQuantity + 1;
+            updateCartQuantity(button.closest('.cart-card').dataset.id, quantityInput.value);
         });
     });
 });
 
+function updateCartQuantity(id, quantity) {
+    let cartItems = getLocalStorage('so-cart') || [];
+    const itemIndex = cartItems.findIndex(item => item.id === id);
+
+    if (itemIndex !== -1) {
+        cartItems[itemIndex].quantity = parseInt(quantity); // Update quantity
+        setLocalStorage('so-cart', cartItems);
+    }
+}
+
 renderCartContents();
+
+function addToCart(product) {
+  const cartItems = getLocalStorage('so-cart') || [];
+  
+  const existingProductIndex = cartItems.findIndex(item => item.id === product.id);
+  
+  if (existingProductIndex > -1) {
+    // If the product exists, increase quantity
+    cartItems[existingProductIndex].quantity += 1;
+  } else {
+    // New product, initialize quantity
+    product.quantity = 1;
+    cartItems.push(product);
+  }
+
+  setLocalStorage('so-cart', cartItems);
+  renderCartContents();
+}
