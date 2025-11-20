@@ -35,6 +35,12 @@ function cartItemTemplate(item) {
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
     <p class="cart-card__quantity">qty: 1</p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
+    
+    <div class="cart-card__quantity">
+        <button class="quantity-decrease">-</button>
+        <input type="number" class="quantity-input" value="1" min="1" />
+        <button class="quantity-increase">+</button>
+    </div>
     <button class="remove-btn" data-id="${item.id}">Remove</button>
   </li>`;
 }
@@ -64,5 +70,27 @@ function removeItem(id) {
   renderCartContents(); 
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    const decreaseButtons = document.querySelectorAll('.quantity-decrease');
+    const increaseButtons = document.querySelectorAll('.quantity-increase');
+
+    decreaseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const quantityInput = this.nextElementSibling;
+            let currentQuantity = parseInt(quantityInput.value);
+            if (currentQuantity > 1) {
+                quantityInput.value = currentQuantity - 1;
+            }
+        });
+    });
+
+    increaseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const quantityInput = this.previousElementSibling;
+            let currentQuantity = parseInt(quantityInput.value);
+            quantityInput.value = currentQuantity + 1;
+        });
+    });
+});
 
 renderCartContents();

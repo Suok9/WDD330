@@ -261,3 +261,54 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.quantity-input {
+    width: 50px; /* You might want to adjust this value */
+    text-align: center;
+    margin: 0 10px; /* Space between buttons and input */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.quantity-decrease,
+.quantity-increase {
+    background-color: #007BFF; /* Button background color */
+    color: #FFFFFF; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 5px 10px; /* Padding around button text */
+    cursor: pointer; /* Cursor style on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.quantity-decrease:hover,
+.quantity-increase:hover {
+    background-color: #0056b3; /* Darker background on hover */
+}
+
+.remove-btn {
+    background-color: red; /* Button background for removing */
+    color: #ffffff; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 5px 10px; /* Padding */
+    cursor: pointer; /* Cursor style on hover */
+}
+
+.remove-btn:hover {
+    background-color: darkred; /* Darker red on hover */
+}
