@@ -202,6 +202,27 @@ button {
 .product-detail img {
   width: 100%;
 }
+.product-detail img {
+  width: 75%;
+}
+
+@media (max-width: 1024px) {
+  .product-detail img {
+    width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-detail img {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-detail img {
+    width: 100%;
+  }
+}
 
 /* Start cart list card styles */
 .cart-card {
