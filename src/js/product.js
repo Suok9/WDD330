@@ -1,6 +1,8 @@
 import { getParam, loadHeaderFooter, renderDiscount, renderNumberOfItemsBackpack, checkDiscount } from './utils.mjs';
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductDetails from "./ProductDetails.mjs";
+
+loadHeaderFooter();
 
 document.addEventListener("DOMContentLoaded", async () => {
   await loadHeaderFooter();
@@ -10,7 +12,7 @@ const params = new URLSearchParams(window.location.search);
 const productId = params.get("product");
 
 // 2. Create data source
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 
 // 3. Create the product details controller
 const product = new ProductDetails(productId, dataSource);

@@ -19,18 +19,18 @@ export function buildImageUrl(path) {
 
 
 
-export default class ProductData {
+export default class ExternalServices {
   constructor(category = "tents") {
     this.category = category;
     this.path = `../json/${this.category}.json`; 
   }
   
   
-  getData() {
-    return fetch(this.path)
-      .then(convertToJson)
-      .then((data) => data.Result ?? data); // supports API or local JSON
-  }
+  async getData(category) {
+  const response = await fetch(`${baseURL}products/search/${category} `);
+  const data = await convertToJson(response);
+  return data.Result;
+}
   
 
   async findProductById(id) {

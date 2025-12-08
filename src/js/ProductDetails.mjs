@@ -1,5 +1,5 @@
 import { getLocalStorage,setLocalStorage } from './utils.mjs';
-export default class productDetails {
+export default class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
     this.dataSource = dataSource;
@@ -18,7 +18,7 @@ export default class productDetails {
 
   renderProductDetails(){
     const details =
-    productDetailsTemplate(this.product);
+    ProductDetailsTemplate(this.product);
 
     document.querySelector('.product-detail').innerHTML = details;
   }
@@ -46,7 +46,7 @@ export default class productDetails {
 
 }
 
-function productDetailsTemplate(product) {
+function ProductDetailsTemplate(product) {
     
   return`
   <h3>${product.Brand}</h3>
@@ -66,15 +66,3 @@ function productDetailsTemplate(product) {
 
 
 
-//document.getElementById('home').textContent = product.Name;
-//document.getElementById('drive').textContent = product.Brand.Name;
-
-//const productImage = document.getElementById('productImage');
-//productImage.src = product.Image;
-//productImage.alt = product.Brand.Name;
-
-//document.getElementById('productDesc').innerHTML = product.DescriptionHtmlSimple;
-//document.getElementById('productColor').textContent = product.Colors[0].ColorName
-//document.getElementById('productPrice').textContent = product.FinalPrice;
-
-//document.getElementById('addToCart').dataset.id = product.Id;

@@ -333,12 +333,8 @@ footer {
 .remove-btn:hover {
     background-color: darkred; /* Darker red on hover */
 }
-
-.foot {
+footer {
   display: flex;
   flex-direction: column;
 }
 
-.foot a {
-  text-decoration: none;
-}
