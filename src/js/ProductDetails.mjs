@@ -24,10 +24,25 @@ export default class productDetails {
   }
 
   addProductToCart() {
-    const cartItems = getLocalStorage('so-cart') || [];
-    cartItems.push(this.product);
-setLocalStorage('so-cart', cartItems);
+  let cartItems = getLocalStorage('so-cart') || [];
+
+  const index = cartItems.findIndex(i => i.id === this.product.id);
+
+  if (index > -1) {
+    cartItems[index].quantity += 1;
+  } else {
+    cartItems.push({
+      id: this.product.id,
+      Name: this.product.Name,
+      Image: this.product.Image,
+      Colors: this.product.Colors[0].ColorName,
+      FinalPrice: this.product.FinalPrice,
+      quantity: 1
+    });
   }
+
+  setLocalStorage('so-cart', cartItems);
+}
 
 }
 
